@@ -6,7 +6,19 @@ import numpy as np
 import matplotlib.pyplot as plt
 from typing import Optional, List
 from visualize_activations import ActivationMapVisualizer
+import urllib.request
 
+
+MODEL_URL = "https://drive.google.com/uc?export=download&id=1OYLw7h43K-VFIV3YULKYSfkyXZ77nG74" # <-- Replace with your actual model file link
+MODEL_PATH = "model/emotion_model.pth"
+
+def download_model():
+    if not os.path.exists(MODEL_PATH):
+        os.makedirs(os.path.dirname(MODEL_PATH), exist_ok=True)
+        with st.spinner("Downloading model weights..."):
+            urllib.request.urlretrieve(MODEL_URL, MODEL_PATH)
+
+download_model()
 # Main streamlit ui web-app
 st.set_page_config(page_title="Emotion CNN Activation Visualizer", layout="wide")
 
